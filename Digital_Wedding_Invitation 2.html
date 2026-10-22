@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walima & Nikah Invitation | Alfisha & Anamatullah | Tanveer & Farheen</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#FDFBF7',
+                        gold: {
+                            DEFAULT: '#C5A059',
+                            light: '#E2C787',
+                            dark: '#9A7B38',
+                            metallic: '#D4AF37'
+                        },
+                        burgundy: '#581845',
+                        roseAccent: '#E8A3A8',
+                    },
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'serif'],
+                        script: ['Great Vibes', 'cursive'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #9A7B38 0%, #E2C787 50%, #9A7B38 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-border {
+            border-image: linear-gradient(to bottom, #9A7B38, #E2C787, #9A7B38) 1;
+        }
+        .royal-card {
+            background: rgba(253, 251, 247, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(154, 123, 56, 0.15);
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
+            50% { box-shadow: 0 0 30px rgba(212, 175, 55, 0.8); }
+        }
+        .glow-effect {
+            animation: pulseGlow 3s infinite;
+        }
+    </style>
+</head>
+<body class="bg-[#F4EFE6] text-slate-800 font-sans antialiased overflow-x-hidden selection:bg-gold-light selection:text-slate-900">
+
+    <!-- AUDIO PLAYER (Flute Instrumental Toggle) -->
+    <div id="audio-control" class="fixed bottom-6 right-6 z-50 bg-white/90 backdrop-blur-md border border-gold/40 p-3 rounded-full shadow-lg cursor-pointer hover:bg-gold hover:text-white transition-all duration-300 flex items-center justify-center group" title="Toggle Flute Music">
+        <i id="audio-icon" class="fa-solid fa-music text-gold group-hover:text-white text-lg"></i>
+        <audio id="bg-audio" loop preload="auto">
+            <source src="https://ia801503.us.archive.org/15/items/jashn-e-bahara-flute/Jashn%20E%20Baharaa%20Flute%20Instrumental.mp3" type="audio/mpeg">
+            <source src="https://cdn.pixabay.com/download/audio/2022/11/06/audio_13cf2d0767.mp3?filename=indian-flute-meditation-125076.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <!-- COVER / WELCOME ENVELOPE OVERLAY -->
+    <div id="cover-overlay" class="fixed inset-0 z-40 bg-[#2C241D] flex flex-col items-center justify-center p-6 transition-transform duration-1000 ease-in-out">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#C5A059_1px,transparent_1px)] [background-size:24px_24px]"></div>
+        
+        <div class="max-w-md w-full royal-card border-2 border-gold/60 p-8 rounded-2xl text-center relative z-10 glow-effect">
+            <!-- Hanging Lanterns SVG / Icon decoration -->
+            <div class="flex justify-center space-x-6 mb-6">
+                <i class="fa-solid fa-moon text-gold text-2xl animate-float"></i>
+                <i class="fa-solid fa-kaaba text-gold text-3xl animate-float" style="animation-delay: 1s;"></i>
+                <i class="fa-solid fa-star text-gold text-2xl animate-float" style="animation-delay: 2s;"></i>
+            </div>
+
+            <span class="text-xs uppercase tracking-[0.3em] text-gold-dark font-semibold">In The Name of Allah</span>
+            <h2 class="font-script text-4xl text-slate-700 my-2">The Most Beneficent & Merciful</h2>
+            
+            <div class="my-6 py-4 border-y border-gold/30">
+                <span class="inline-block bg-gold text-white font-cinzel px-6 py-2 rounded-full tracking-widest text-sm shadow-md mb-3">
+                    ASSALAMU ALAIKUM
+                </span>
+                <p class="text-sm text-slate-600 mt-2 font-medium">You are cordially invited to celebrate the sacred union of</p>
+            </div>
+
+            <div class="space-y-1 mb-8 font-cinzel text-slate-800 font-semibold text-lg">
+                <p>Alfisha & Anamatullah</p>
+                <p class="text-gold text-sm font-light">&</p>
+                <p>Tanveer & Farheen</p>
+            </div>
+
+            <button onclick="openInvitation()" class="w-full py-4 bg-gradient-to-r from-gold-dark via-gold to-gold-dark text-white font-cinzel font-bold tracking-wider rounded-xl shadow-lg hover:shadow-2xl hover:scale-[1.02] active:scale-95 transition-all duration-300 flex items-center justify-center space-x-3">
+                <i class="fa-solid fa-envelope-open-text"></i>
+                <span>Open Invitation</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- MAIN APP CONTENT -->
+    <div id="main-content" class="opacity-0 transition-opacity duration-1000">
+
+        <!-- HERO HEADER SECTION -->
+        <header class="relative min-h-screen flex flex-col items-center justify-center text-center p-6 bg-cover bg-center" style="background-image: linear-gradient(rgba(44, 36, 29, 0.75), rgba(44, 36, 29, 0.85)), url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1600');">
+            <!-- Decorative Arch overlay border -->
+            <div class="absolute inset-4 sm:inset-8 border border-gold/40 pointer-events-none rounded-3xl flex flex-col justify-between p-4">
+                <div class="flex justify-between text-gold text-xl">
+                    <i class="fa-solid fa-torii-gate opacity-70"></i>
+                    <i class="fa-solid fa-torii-gate opacity-70"></i>
+                </div>
+                <div class="flex justify-between text-gold text-xl">
+                    <i class="fa-solid fa-torii-gate opacity-70"></i>
+                    <i class="fa-solid fa-torii-gate opacity-70"></i>
+                </div>
+            </div>
+
+            <div class="max-w-3xl mx-auto z-10 text-white space-y-6 px-4">
+                <div class="inline-flex items-center space-x-2 bg-gold/20 border border-gold/50 px-4 py-1.5 rounded-full text-gold-light text-xs sm:text-sm tracking-widest uppercase font-semibold">
+                    <i class="fa-solid fa-mosque"></i>
+                    <span>Walima & Nikah Celebration</span>
+                </div>
+
+                <h1 class="font-cinzel text-4xl sm:text-6xl md:text-7xl font-bold tracking-wide gold-gradient-text">
+                    Walima & Nikah
+                </h1>
+
+                <p class="font-script text-3xl sm:text-5xl text-rose-200">
+                    Friday, 18<sup>th</sup> December 2026
+                </p>
+
+                <!-- COUNTDOWN TIMER -->
+                <div class="grid grid-cols-4 gap-3 max-w-lg mx-auto py-6">
+                    <div class="bg-black/40 backdrop-blur-md border border-gold/40 p-3 rounded-xl">
+                        <span id="days" class="font-cinzel text-2xl sm:text-3xl font-bold text-gold">00</span>
+                        <p class="text-[10px] sm:text-xs uppercase tracking-wider text-slate-300">Days</p>
+                    </div>
+                    <div class="bg-black/40 backdrop-blur-md border border-gold/40 p-3 rounded-xl">
+                        <span id="hours" class="font-cinzel text-2xl sm:text-3xl font-bold text-gold">00</span>
+                        <p class="text-[10px] sm:text-xs uppercase tracking-wider text-slate-300">Hours</p>
+                    </div>
+                    <div class="bg-black/40 backdrop-blur-md border border-gold/40 p-3 rounded-xl">
+                        <span id="minutes" class="font-cinzel text-2xl sm:text-3xl font-bold text-gold">00</span>
+                        <p class="text-[10px] sm:text-xs uppercase tracking-wider text-slate-300">Minutes</p>
+                    </div>
+                    <div class="bg-black/40 backdrop-blur-md border border-gold/40 p-3 rounded-xl">
+                        <span id="seconds" class="font-cinzel text-2xl sm:text-3xl font-bold text-gold">00</span>
+                        <p class="text-[10px] sm:text-xs uppercase tracking-wider text-slate-300">Seconds</p>
+                    </div>
+                </div>
+
+                <div class="pt-4">
+                    <a href="#details" class="inline-flex items-center space-x-2 text-gold hover:text-white transition-colors duration-300 animate-bounce">
+                        <span>Explore Invitation</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- HOST & COUPLE DETAILS SECTION -->
+        <section id="details" class="py-20 px-6 max-w-5xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-gold font-cinzel tracking-widest text-sm uppercase">Cordially Inviting You</span>
+                <h2 class="font-cinzel text-3xl sm:text-4xl font-bold text-slate-800 mt-2">With The Grace of Allah</h2>
+                <div class="w-24 h-0.5 bg-gold mx-auto mt-4"></div>
+                <p class="mt-6 text-slate-600 max-w-2xl mx-auto italic font-serif">
+                    "Mrs. Yasmeen Khan requests the pleasure of your gracious presence on the auspicious occasion of the Walima & Nikah of her beloved son & daughter"
+                </p>
+            </div>
+
+            <!-- COUPLE CARDS GRID -->
+            <div class="grid md:grid-cols-2 gap-8 mb-16">
+                <!-- COUPLE 1 -->
+                <div class="royal-card border-t-4 border-gold p-8 rounded-2xl shadow-xl text-center relative overflow-hidden group hover:shadow-2xl transition-all duration-300">
+                    <div class="absolute -right-10 -bottom-10 opacity-5 text-gold text-9xl">
+                        <i class="fa-solid fa-rings"></i>
+                    </div>
+                    <span class="bg-gold/10 text-gold-dark text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Couple One</span>
+                    <h3 class="font-cinzel text-2xl font-bold text-slate-800 mt-4">Alfisha Khan</h3>
+                    <p class="text-xs text-slate-500 mt-1">(D/o Late Mr. Tasleem Khan & Mrs. Yasmeen Khan)</p>
+                    
+                    <div class="my-4 text-gold font-script text-2xl">&bull; weds &bull;</div>
+                    
+                    <h3 class="font-cinzel text-2xl font-bold text-slate-800">Anamatullah Siddiqui</h3>
+                    <p class="text-xs text-slate-500 mt-1">(S/o Mr. Nazim Husain Siddiqui & Mrs. Nasreen Bano)</p>
+                </div>
+
+                <!-- COUPLE 2 -->
+                <div class="royal-card border-t-4 border-gold p-8 rounded-2xl shadow-xl text-center relative overflow-hidden group hover:shadow-2xl transition-all duration-300">
+                    <div class="absolute -right-10 -bottom-10 opacity-5 text-gold text-9xl">
+                        <i class="fa-solid fa-rings"></i>
+                    </div>
+                    <span class="bg-gold/10 text-gold-dark text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Couple Two</span>
+                    <h3 class="font-cinzel text-2xl font-bold text-slate-800 mt-4">Tanveer Khan</h3>
+                    <p class="text-xs text-slate-500 mt-1">(S/o Late Mr. Tasleem Khan & Mrs. Yasmeen Khan)</p>
+                    
+                    <div class="my-4 text-gold font-script text-2xl">&bull; weds &bull;</div>
+                    
+                    <h3 class="font-cinzel text-2xl font-bold text-slate-800">Farheen Khan</h3>
+                    <p class="text-xs text-slate-500 mt-1">(D/o Late Mr. Saleem Khan & Mrs. Naseem Khan)</p>
+                </div>
+            </div>
+
+            <!-- HOST DETAILS -->
+            <div class="royal-card border border-gold/40 p-8 rounded-2xl text-center max-w-2xl mx-auto shadow-md">
+                <h4 class="font-cinzel font-bold text-gold-dark text-lg mb-2">FROM</h4>
+                <p class="font-semibold text-slate-800">Mrs. Yasmeen Khan & Sameer Khan</p>
+                <p class="text-sm text-slate-600 mt-1">Aliganj, Lucknow</p>
+                <div class="mt-3 flex justify-center space-x-6 text-sm text-slate-700">
+                    <span><i class="fa-solid fa-phone text-gold mr-2"></i>6389948033</span>
+                    <span><i class="fa-solid fa-phone text-gold mr-2"></i>9044188225</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROGRAMME TIMELINE SECTION -->
+        <section class="py-20 px-6 bg-[#2C241D] text-white relative">
+            <div class="absolute inset-0 opacity-5 bg-[radial-gradient(#C5A059_1px,transparent_1px)] [background-size:24px_24px]"></div>
+            
+            <div class="max-w-4xl mx-auto relative z-10">
+                <div class="text-center mb-16">
+                    <span class="text-gold font-cinzel tracking-widest text-sm uppercase">Insha Allah</span>
+                    <h2 class="font-cinzel text-3xl sm:text-4xl font-bold text-gold-light mt-2">Programme Itinerary</h2>
+                    <p class="text-slate-300 font-script text-2xl mt-2">Friday, 18th December 2026</p>
+                    <div class="w-24 h-0.5 bg-gold mx-auto mt-4"></div>
+                </div>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- TIMELINE ITEM 1 -->
+                    <div class="bg-white/5 border border-gold/30 p-6 rounded-2xl text-center hover:border-gold transition-all duration-300">
+                        <div class="w-12 h-12 bg-gold/20 text-gold rounded-full flex items-center justify-center mx-auto mb-4 text-xl">
+                            <i class="fa-solid fa-car-side"></i>
+                        </div>
+                        <h3 class="font-cinzel font-bold text-lg text-gold-light">Arrival of Barat</h3>
+                        <p class="text-2xl font-bold mt-2 font-cinzel">08:00 P.M.</p>
+                        <p class="text-xs text-slate-400 mt-2">Welcoming our esteemed guests</p>
+                    </div>
+
+                    <!-- TIMELINE ITEM 2 -->
+                    <div class="bg-white/5 border border-gold/30 p-6 rounded-2xl text-center hover:border-gold transition-all duration-300">
+                        <div class="w-12 h-12 bg-gold/20 text-gold rounded-full flex items-center justify-center mx-auto mb-4 text-xl">
+                            <i class="fa-solid fa-file-signature"></i>
+                        </div>
+                        <h3 class="font-cinzel font-bold text-lg text-gold-light">Nikah</h3>
+                        <p class="text-2xl font-bold mt-2 font-cinzel">08:30 P.M.</p>
+                        <p class="text-xs text-slate-400 mt-2">Solemnization of marriage</p>
+                    </div>
+
+                    <!-- TIMELINE ITEM 3 -->
+                    <div class="bg-white/5 border border-gold/30 p-6 rounded-2xl text-center hover:border-gold transition-all duration-300">
+                        <div class="w-12 h-12 bg-gold/20 text-gold rounded-full flex items-center justify-center mx-auto mb-4 text-xl">
+                            <i class="fa-solid fa-utensils"></i>
+                        </div>
+                        <h3 class="font-cinzel font-bold text-lg text-gold-light">Dinner</h3>
+                        <p class="text-2xl font-bold mt-2 font-cinzel">09:00 P.M.</p>
+                        <p class="text-xs text-slate-400 mt-2">Feast & Celebration</p>
+                    </div>
+
+                    <!-- TIMELINE ITEM 4 -->
+                    <div class="bg-white/5 border border-gold/30 p-6 rounded-2xl text-center hover:border-gold transition-all duration-300">
+                        <div class="w-12 h-12 bg-gold/20 text-gold rounded-full flex items-center justify-center mx-auto mb-4 text-xl">
+                            <i class="fa-solid fa-hands-holding-child"></i>
+                        </div>
+                        <h3 class="font-cinzel font-bold text-lg text-gold-light">Rukhsati</h3>
+                        <p class="text-2xl font-bold mt-2 font-cinzel">11:00 P.M.</p>
+                        <p class="text-xs text-slate-400 mt-2">Farewell blessing</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VENUE SECTION -->
+        <section class="py-20 px-6 max-w-5xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-gold font-cinzel tracking-widest text-sm uppercase">Location</span>
+                <h2 class="font-cinzel text-3xl sm:text-4xl font-bold text-slate-800 mt-2">The Wedding Venue</h2>
+                <div class="w-24 h-0.5 bg-gold mx-auto mt-4"></div>
+            </div>
+
+            <div class="royal-card border border-gold/40 p-8 rounded-3xl shadow-xl grid md:grid-cols-2 gap-8 items-center">
+                <div class="space-y-6">
+                    <div class="inline-flex items-center space-x-3 text-gold">
+                        <i class="fa-solid fa-location-dot text-2xl"></i>
+                        <h3 class="font-cinzel font-bold text-2xl text-slate-800">Lucknow Garden</h3>
+                    </div>
+                    <p class="text-slate-600 leading-relaxed">
+                        I.I.M. Road, Lucknow, Uttar Pradesh.<br>
+                        Join us in celebrating this joyous occasion with your gracious presence and heartfelt duas.
+                    </p>
+                    <div class="pt-4">
+                        <a href="https://maps.google.com/?q=Lucknow+Garden+IIM+Road+Lucknow" target="_blank" class="inline-flex items-center space-x-3 bg-gold hover:bg-gold-dark text-white font-cinzel px-6 py-3 rounded-xl shadow-md transition-all duration-300">
+                            <i class="fa-solid fa-map-location-dot"></i>
+                            <span>Get Directions</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Google Map Embed -->
+                <div class="w-full h-64 sm:h-80 bg-slate-200 rounded-2xl overflow-hidden border-2 border-gold/30 shadow-inner relative flex items-center justify-center">
+                    <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=I.I.M.+Road,+Lucknow&t=&z=14&ie=UTF8&iwloc=&output=embed" class="w-full h-full border-0"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- RSVP & WISHES GUESTBOOK SECTION -->
+        <section class="py-20 px-6 bg-[#F9F6F0]">
+            <div class="max-w-3xl mx-auto">
+                <div class="text-center mb-16">
+                    <span class="text-gold font-cinzel tracking-widest text-sm uppercase">Blessings & RSVP</span>
+                    <h2 class="font-cinzel text-3xl sm:text-4xl font-bold text-slate-800 mt-2">Send Your Wishes & RSVP</h2>
+                    <div class="w-24 h-0.5 bg-gold mx-auto mt-4"></div>
+                </div>
+
+                <div class="royal-card border border-gold/40 p-8 sm:p-10 rounded-3xl shadow-xl">
+                    <form id="wishes-form" onsubmit="submitWishes(event)" class="space-y-6">
+                        <div class="grid sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-cinzel font-bold text-slate-700 mb-2">Your Name</label>
+                                <input type="text" id="guest-name" required placeholder="e.g. Dr. Ahmed Khan" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-gold focus:ring-1 focus:ring-gold outline-none transition-all">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-cinzel font-bold text-slate-700 mb-2">Attendance Status</label>
+                                <select id="guest-attendance" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-gold focus:ring-1 focus:ring-gold outline-none transition-all">
+                                    <option value="Joyfully Attending">Joyfully Attending</option>
+                                    <option value="Sending Best Wishes">Sending Best Wishes (Unable to attend)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-cinzel font-bold text-slate-700 mb-2">Your Wishes & Duas</label>
+                            <textarea id="guest-message" rows="4" required placeholder="May Allah bless this union with love, peace, and prosperity..." class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-gold focus:ring-1 focus:ring-gold outline-none transition-all"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-4 bg-gold hover:bg-gold-dark text-white font-cinzel font-bold tracking-wider rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center space-x-3">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Send Wishes & Confirm RSVP</span>
+                        </button>
+                    </form>
+
+                    <!-- LIVE WISHES LIST -->
+                    <div class="mt-12">
+                        <h3 class="font-cinzel font-bold text-xl text-slate-800 mb-6 flex items-center justify-between">
+                            <span>Guestbook Wishes</span>
+                            <span id="wishes-count" class="text-xs bg-gold/10 text-gold px-3 py-1 rounded-full">3 Wishes</span>
+                        </h3>
+                        <div id="wishes-container" class="space-y-4 max-h-80 overflow-y-auto pr-2">
+                            <div class="p-4 rounded-xl bg-white border border-slate-200 shadow-sm">
+                                <div class="flex justify-between items-center mb-1">
+                                    <h4 class="font-bold text-slate-800 font-cinzel text-sm">Mohammed Tariq</h4>
+                                    <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full">Joyfully Attending</span>
+                                </div>
+                                <p class="text-xs text-slate-600 italic">"Mabrouk! May Allah shower His countless blessings upon both couples and bless your homes with everlasting happiness."</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-white border border-slate-200 shadow-sm">
+                                <div class="flex justify-between items-center mb-1">
+                                    <h4 class="font-bold text-slate-800 font-cinzel text-sm">Zoya & Family</h4>
+                                    <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full">Joyfully Attending</span>
+                                </div>
+                                <p class="text-xs text-slate-600 italic">"Heartiest congratulations to Mrs. Yasmeen Khan and the families. Looking forward to celebrating this beautiful Nikah!"</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-white border border-slate-200 shadow-sm">
+                                <div class="flex justify-between items-center mb-1">
+                                    <h4 class="font-bold text-slate-800 font-cinzel text-sm">Dr. Salman Farooq</h4>
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full">Sending Best Wishes</span>
+                                </div>
+                                <p class="text-xs text-slate-600 italic">"So sorry to miss due to travel, but sending my warmest duas and heartfelt congratulations to all!"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- COMPLIMENTS & ACKNOWLEDGEMENTS -->
+        <footer class="py-16 px-6 bg-[#2C241D] text-slate-300 text-center border-t border-gold/20">
+            <div class="max-w-4xl mx-auto space-y-8">
+                <div>
+                    <h4 class="font-cinzel text-gold text-lg font-bold mb-3 tracking-widest">R.S.V.P.</h4>
+                    <p class="text-sm leading-relaxed text-slate-300 max-w-2xl mx-auto">
+                        Rais Ahmad, Wasim Raja, Haseen Khan, Habib Bhai, Sharafat Hussain, Faizan Khan, Mohd. Shareef, Raja & Badshah.
+                    </p>
+                </div>
+
+                <div class="pt-4 border-t border-white/10">
+                    <h4 class="font-cinzel text-gold text-lg font-bold mb-3 tracking-widest">With Best Compliments From</h4>
+                    <p class="text-sm leading-relaxed text-slate-300">
+                        Shoeb Siddiqui, All Relatives & Friends.
+                    </p>
+                </div>
+
+                <div class="pt-8 text-xs text-slate-500 font-cinzel">
+                    <p>&copy; 2026 Walima & Nikah Celebration. Designed with elegance & love.</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- NOTIFICATION POPUP (Custom Message Box) -->
+    <div id="custom-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 text-center shadow-2xl border border-gold/40 animate-float" style="animation-duration: 2s;">
+            <div class="w-12 h-12 bg-gold/20 text-gold rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                <i class="fa-solid fa-heart"></i>
+            </div>
+            <h3 id="modal-title" class="font-cinzel font-bold text-xl text-slate-800 mb-2">Jazakallah Khair!</h3>
+            <p id="modal-text" class="text-sm text-slate-600 mb-6">Your wishes have been successfully added to the guestbook.</p>
+            <button onclick="closeModal()" class="w-full py-3 bg-gold hover:bg-gold-dark text-white font-cinzel font-bold rounded-xl transition-all">Close</button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Open Invitation Envelope Transition
+        function openInvitation() {
+            const cover = document.getElementById('cover-overlay');
+            const main = document.getElementById('main-content');
+            const audio = document.getElementById('bg-audio');
+            const audioIcon = document.getElementById('audio-icon');
+            
+            // Play background flute music upon opening
+            audio.play().then(() => {
+                isPlaying = true;
+                audioIcon.className = 'fa-solid fa-volume-high text-gold group-hover:text-white text-lg animate-pulse';
+            }).catch(e => {
+                console.log("Audio autoplay restricted:", e);
+            });
+            
+            cover.classList.add('-translate-y-full', 'opacity-0');
+            setTimeout(() => {
+                cover.style.display = 'none';
+                main.classList.remove('opacity-0');
+            }, 800);
+        }
+
+        // Audio Toggle Button
+        const audioControl = document.getElementById('audio-control');
+        const bgAudio = document.getElementById('bg-audio');
+        const audioIcon = document.getElementById('audio-icon');
+        let isPlaying = false;
+
+        audioControl.addEventListener('click', () => {
+            if (isPlaying) {
+                bgAudio.pause();
+                audioIcon.className = 'fa-solid fa-music text-gold group-hover:text-white text-lg';
+                isPlaying = false;
+            } else {
+                bgAudio.play().then(() => {
+                    audioIcon.className = 'fa-solid fa-volume-high text-gold group-hover:text-white text-lg animate-pulse';
+                    isPlaying = true;
+                }).catch(e => console.log(e));
+            }
+        });
+
+        // Countdown Timer Logic to December 18, 2026 20:00:00
+        const weddingDate = new Date("December 18, 2026 20:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            if (distance < 0) {
+                document.getElementById('days').innerText = "00";
+                document.getElementById('hours').innerText = "00";
+                document.getElementById('minutes').innerText = "00";
+                document.getElementById('seconds').innerText = "00";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = String(days).padStart(2, '0');
+            document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+            document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Wishes & RSVP Form Submission
+        let wishesList = [
+            { name: "Mohammed Tariq", status: "Joyfully Attending", message: "Mabrouk! May Allah shower His countless blessings upon both couples and bless your homes with everlasting happiness." },
+            { name: "Zoya & Family", status: "Joyfully Attending", message: "Heartiest congratulations to Mrs. Yasmeen Khan and the families. Looking forward to celebrating this beautiful Nikah!" },
+            { name: "Dr. Salman Farooq", status: "Sending Best Wishes", message: "So sorry to miss due to travel, but sending my warmest duas and heartfelt congratulations to all!" }
+        ];
+
+        function submitWishes(e) {
+            e.preventDefault();
+            const name = document.getElementById('guest-name').value.trim();
+            const attendance = document.getElementById('guest-attendance').value;
+            const message = document.getElementById('guest-message').value.trim();
+
+            if (!name || !message) return;
+
+            wishesList.unshift({ name, status: attendance, message });
+            renderWishes();
+
+            document.getElementById('wishes-form').reset();
+            showModal("Jazakallah Khair!", "Thank you for your warm wishes and RSVP response!");
+        }
+
+        function renderWishes() {
+            const container = document.getElementById('wishes-container');
+            const countBadge = document.getElementById('wishes-count');
+            container.innerHTML = '';
+            
+            wishesList.forEach(wish => {
+                const badgeColor = wish.status === 'Joyfully Attending' ? 'bg-emerald-100 text-emerald-800' : 'bg-blue-100 text-blue-800';
+                const card = document.createElement('div');
+                card.className = 'p-4 rounded-xl bg-white border border-slate-200 shadow-sm transition-all animate-[fadeIn_0.5s_ease-in-out]';
+                card.innerHTML = `
+                    <div class="flex justify-between items-center mb-1">
+                        <h4 class="font-bold text-slate-800 font-cinzel text-sm">${escapeHtml(wish.name)}</h4>
+                        <span class="text-xs ${badgeColor} px-2 py-0.5 rounded-full">${escapeHtml(wish.status)}</span>
+                    </div>
+                    <p class="text-xs text-slate-600 italic">"${escapeHtml(wish.message)}"</p>
+                `;
+                container.appendChild(card);
+            });
+
+            countBadge.innerText = `${wishesList.length} Wishes`;
+        }
+
+        function showModal(title, text) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-text').innerText = text;
+            document.getElementById('custom-modal').classList.remove('hidden');
+            document.getElementById('custom-modal').classList.add('flex');
+        }
+
+        function closeModal() {
+            document.getElementById('custom-modal').classList.remove('flex');
+            document.getElementById('custom-modal').classList.add('hidden');
+        }
+
+        function escapeHtml(text) {
+            const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+            return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+        }
+    </script>
+</body>
+</html>
